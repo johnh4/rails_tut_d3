@@ -4,6 +4,10 @@ RailsTutD3::Application.routes.draw do
   get "/about", to: "static_pages#about", as: "/about"
   get "/contact", to: "static_pages#contact", as: "/contact"
 
+  get "/signup", to: "users#new", as: "/signup"
+
+  resources :users
+
   root "static_pages#home"
 
   # The priority is based upon order of creation: first created -> highest priority.
