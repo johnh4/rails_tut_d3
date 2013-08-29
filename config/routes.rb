@@ -1,4 +1,11 @@
 RailsTutD3::Application.routes.draw do
+
+  get "/help", to: "static_pages#help", as: "/help"
+  get "/about", to: "static_pages#about", as: "/about"
+  get "/contact", to: "static_pages#contact", as: "/contact"
+
+  root "static_pages#home"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
