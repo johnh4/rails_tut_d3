@@ -3,6 +3,7 @@ namespace :db do
 	task populate: :environment do
 		make_users
 		make_microposts
+		make_relationships
 	end
 
 	def make_users
@@ -25,6 +26,15 @@ namespace :db do
 			content = Faker::Lorem.sentence(5)
 			users.each { |user| user.microposts.create!(content: content) }
 		end
+	end
+
+	def make_relationships
+		users = User.all
+		user = users.first
+		followed = users[2..50]
+		followers = users[3..40]
+		followers.each { |follower| follower.follow!(user) }
+		followed.each { |followed| user.follow!(followed) }
 	end
 
 end
