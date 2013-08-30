@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>RailsTutD3</title>
+  <title>RailsTutD3 | <%= yield(:title) %></title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
@@ -14,7 +14,7 @@
 			<%= content_tag(:div, value, class: "alert alert-#{key}") %>
 		<% end %>
 		<%= yield %>
-		<%= render 'layouts/footer' %>
 	</div>
+		<%= render 'layouts/footer' %>
 </body>
 </html>

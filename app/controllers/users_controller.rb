@@ -1,4 +1,13 @@
 class UsersController < ApplicationController
+
+  before_action :signed_in_user, only: [:index, :edit, :update]
+  before_action :correct_user, only: [:edit, :update]
+  before_action :admin_user, only: [:destroy]
+
+  def index
+    @users = User.all.paginate(page: params[:page])
+  end
+
   def new
   	@user = User.new
   end
@@ -32,9 +41,26 @@ class UsersController < ApplicationController
   	@user = User.find(params[:id])
   end
 
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    redirect_to root_path
+  end
+
 
   private
   	def user_params
   		params.require(:user).permit(:name, :email, :password, :password_confirmation)
   	end
+
+    #before actions
+    def correct_user
+      @user = User.find(params[:id])
+      redirect_to root_path unless current_user?(@user)
+    end
+
+    def admin
+      @user = User.find(params[:id])
+      redirect_to root_path unless @user.admin? 
+    end    
 end
